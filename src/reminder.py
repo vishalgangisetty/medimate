@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 
 class ReminderManager:
     def __init__(self):
-        self.client = MongoClient(Config.MONGO_URI)
+        self.client = MongoClient(Config.MONGO_URI, **Config.get_tls_kwargs())
         self.db = self.client['medimate']
         self.reminders = self.db['reminders']
         self.adherence = self.db['adherence_log']

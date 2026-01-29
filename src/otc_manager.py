@@ -18,6 +18,15 @@ class OTCManager:
 
     def _initialize_otc_db(self):
         try:
+            # Check if namespace already exists and has data
+            try:
+                stats = self.vector_store.index.describe_index_stats()
+                if self.otc_namespace in stats.namespaces and stats.namespaces[self.otc_namespace].vector_count > 0:
+                    logger.info(f"OTC DB namespace '{self.otc_namespace}' already populated. Skipping ingestion.")
+                    return
+            except Exception as e:
+                logger.warning(f"Could not check index stats: {e}")
+
             logger.info("Initializing OTC Vector DB...")
             texts = [item['medicine_name'] for item in self.OTC_LIST]
             metadatas = []

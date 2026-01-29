@@ -7,6 +7,7 @@ import streamlit as st
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from src.utils import setup_logger
+from src.calendar_integration import CalendarIntegration
 
 logger = setup_logger(__name__)
 
@@ -119,10 +120,35 @@ def render_active_schedule():
         
         if submit:
             try:
-                reminder_mgr.log_medicine_intake(
-                    user, selected_medicine, time_slot, 
-                    status, notes if notes else ""
-                )
+                # Find the reminder to map slot to time
+                selected_reminder = next((r for r in reminders if r.get('medicine_name') == selected_medicine), None)
+                target_time = None
+                
+                if selected_reminder:
+                    for t in selected_reminder.get('times', []):
+                        h = int(t.split(':')[0])
+                        slot = "night"
+                        if 5 <= h < 12: slot = "morning"
+                        elif 12 <= h < 17: slot = "afternoon"
+                        
+                        if slot == time_slot:
+                            target_time = t
+                            break
+                
+                # Use mapped time or fall back to current time logic handled by manager if passed None? 
+                # Manager expects string. If we can't map, we'll pass the slot name which might be better than nothing, 
+                # but 'mark_as_taken' expects a scheduled_time for logging.
+                final_time = target_time if target_time else datetime.now().strftime("%H:%M")
+                
+                if status == "taken":
+                    reminder_mgr.mark_as_taken(
+                        user, selected_medicine, final_time
+                    )
+                else:
+                    reminder_mgr.mark_as_skipped(
+                        user, selected_medicine, final_time, reason=notes
+                    )
+                    
                 st.success("✅ Dose logged successfully")
                 st.rerun()
             except Exception as e:
@@ -174,6 +200,8 @@ def render_add_medication():
             help="Add any special instructions"
         )
         
+        add_to_calendar = st.checkbox("📅 Add reminders to Google Calendar")
+        
         st.markdown("<br>", unsafe_allow_html=True)
         submit = st.form_submit_button("💾 Save Medication Schedule", use_container_width=True)
         
@@ -219,6 +247,26 @@ def render_add_medication():
                         instructions=notes
                     )
                     st.success(f"✅ Medication schedule created for {medicine_name}")
+                    
+                    if add_to_calendar:
+                        with st.spinner("📅 Adding to Google Calendar..."):
+                            cal = CalendarIntegration()
+                            if cal.available:
+                                cal_result = cal.create_multiple_reminder_events(
+                                    medicine_name=medicine_name,
+                                    dosage="As specified",
+                                    times=times_list,
+                                    start_date=start_date.strftime("%Y-%m-%d"),
+                                    duration_days=duration_days,
+                                    instructions=notes
+                                )
+                                if cal_result.get('success'):
+                                    st.info(f"📅 Added {cal_result.get('created')} events to Google Calendar")
+                                else:
+                                    st.warning(f"⚠️ Calendar sync partial/failed: Check logs")
+                            else:
+                                st.warning("⚠️ Google Calendar not configured")
+
                     st.rerun()
                 except Exception as e:
                     st.error(f"⚠️ Failed to create schedule: {str(e)}")
@@ -344,16 +392,17 @@ def render_pharmacy_finder_page():
     """, unsafe_allow_html=True)
     
     # Search Tabs
-    t1 = lang_mgr.get_text("gps_location")
-    t2 = lang_mgr.get_text("address_search")
+    t1 = lang_mgr.get_text("item_address_search") if lang_mgr.get_text("item_address_search") != "item_address_search" else "Address & Pincode"
+    t2 = lang_mgr.get_text("gps_location")
     
-    tab1, tab2 = st.tabs([f"📍 {t1}", f"🔍 {t2}"])
+    # Swapped order: Address first, then GPS
+    tab1, tab2 = st.tabs([f"🔍 {t1}", f"📍 {t2}"])
     
     with tab1:
-        render_gps_search()
+        render_address_search()
     
     with tab2:
-        render_address_search()
+        render_gps_search()
 
 
 def render_gps_search():
@@ -427,9 +476,9 @@ def render_address_search():
     """, unsafe_allow_html=True)
     
     address = st.text_input(
-        "Enter Address",
-        placeholder="e.g., 123 Main Street, Chennai, Tamil Nadu",
-        help="Enter a full address including city and state"
+        "Enter Address or Pincode",
+        placeholder="e.g., 123 Main Street, Chennai OR 600028",
+        help="Enter a full address or 6-digit pincode"
     )
     
     radius = st.slider(
@@ -458,7 +507,7 @@ def render_address_search():
                         st.info(f"📍 Location found: {lat:.6f}, {lng:.6f}")
                         
                         # Find pharmacies
-                        results = pharmacy_locator.find_nearby_pharmacies(lat, lng, radius)
+                        results = pharmacy_locator.find_nearby_pharmacies(lat, lng, radius, max_results=20)
                         
                         if results:
                             st.success(f"✅ Found {len(results)} pharmacies")

@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+import certifi
+import ssl
 
 load_dotenv()
 
@@ -13,6 +15,16 @@ class Config:
     DATA_DIR = os.path.join(os.getcwd(), "data")
     INPUT_DIR = os.path.join(DATA_DIR, "input")
     PROCESSED_DIR = os.path.join(DATA_DIR, "processed")
+
+    @staticmethod
+    def get_tls_kwargs():
+        """Get TLS/SSL kwargs for MongoClient"""
+        return {
+            "tlsCAFile": certifi.where(),
+            "serverSelectionTimeoutMS": 5000,
+            "connectTimeoutMS": 5000,
+            "socketTimeoutMS": 5000
+        }
 
     @staticmethod
     def validate():

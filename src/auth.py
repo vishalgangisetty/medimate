@@ -8,7 +8,7 @@ logger = setup_logger(__name__)
 
 class AuthManager:
     def __init__(self):
-        self.client = MongoClient(Config.MONGO_URI, serverSelectionTimeoutMS=5000)
+        self.client = MongoClient(Config.MONGO_URI, **Config.get_tls_kwargs())
         self.db = self.client.get_database("prescription_db")
         self.users = self.db.users
 
