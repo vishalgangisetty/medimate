@@ -9,7 +9,7 @@ To fix this, you need to generate a `credentials.json` file from the Google Clou
 ### 1. Create a Google Cloud Project
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Click the project drop-down at the top and select **New Project**.
-3. Name it `Medical App` (or similar) and click **Create**.
+3. Name it `pharmEZ` (or similar) and click **Create**.
 
 ### 2. Enable Google Calendar API
 1. In the sidebar, go to **APIs & Services > Library**.
@@ -20,7 +20,7 @@ To fix this, you need to generate a `credentials.json` file from the Google Clou
 1. Go to **APIs & Services > OAuth consent screen**.
 2. Select **External** (or Internal if you have a Google Workspace) and click **Create**.
 3. Fill in the required fields:
-   - **App name**: Medication Reminder
+   - **App name**: pharmEZ
    - **User support email**: Your email
    - **Developer contact information**: Your email
 4. Click **Save and Continue**.

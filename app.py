@@ -21,7 +21,7 @@ logger = setup_logger(__name__)
 
 # Medical Application Configuration
 st.set_page_config(
-    page_title="MediMate - Medical Records System",
+    page_title="pharmEZ - Medical Records System",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -74,7 +74,7 @@ if not st.session_state.user:
         st.markdown("""
             <div style='text-align: center; margin: 2rem 0 1.5rem 0;'>
                 <div style='font-size: 56px; margin-bottom: 0.5rem;'>🏥</div>
-                <h1 style='color: #10B981; font-weight: 700; margin: 0; font-size: 42px;'>MediMate</h1>
+                <h1 style='color: #10B981; font-weight: 700; margin: 0; font-size: 42px;'>pharmEZ</h1>
                 <p style='color: #94A3B8; font-size: 15px; margin: 0.5rem 0 0 0;'>Your Personal Health Assistant</p>
             </div>
         """, unsafe_allow_html=True)
