@@ -1,0 +1,333 @@
+/* Premium Dark Professional Medical UI */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: #10B981;
+    --primary-light: #34D399;
+    --primary-dark: #059669;
+    --accent: #8B5CF6;
+    --bg-dark: #0F172A;
+    --bg-card: #1E293B;
+    --bg-elevated: #334155;
+    --text: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-tertiary: #64748B;
+    --border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --success: #10B981;
+    --error: #EF4444;
+    --warning: #F59E0B;
+}
+
+/* Global Styles */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.stApp {
+    background: var(--bg-dark);
+    color: var(--text);
+}
+
+/* Remove excessive padding */
+.main .block-container {
+    padding-top: 2rem !important;
+    padding-bottom: 1rem !important;
+    max-width: 1200px;
+}
+
+/* Sidebar styling */
+section[data-testid="stSidebar"] {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+}
+
+section[data-testid="stSidebar"] > div {
+    padding-top: 2rem;
+}
+
+/* All text colors */
+p, span, label, div {
+    color: var(--text) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text) !important;
+}
+
+/* Buttons */
+.stButton > button {
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s;
+    height: 44px;
+    font-size: 15px;
+}
+
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.stButton > button[kind="primary"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.stButton > button[kind="secondary"] {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.stButton > button[kind="secondary"]:hover {
+    background: var(--bg-card);
+    border-color: var(--primary);
+}
+
+/* Input fields */
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input,
+.stTextArea > div > div > textarea {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 0.875rem 1rem;
+    font-size: 15px;
+    background: var(--bg-card);
+    color: var(--text) !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stNumberInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    background: var(--bg-elevated);
+}
+
+.stTextInput > div > div > input::placeholder,
+.stNumberInput > div > div > input::placeholder,
+.stTextArea > div > div > textarea::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* Select boxes */
+.stSelectbox > div > div {
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.stSelectbox [data-baseweb="select"] {
+    background: var(--bg-card);
+}
+
+.stSelectbox [data-baseweb="select"]:hover {
+    border-color: var(--primary);
+}
+
+/* File uploader */
+.stFileUploader {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    transition: all 0.3s;
+}
+
+.stFileUploader:hover {
+    border-color: var(--primary);
+    background: var(--bg-elevated);
+}
+
+/* Radio buttons */
+.stRadio > div {
+    gap: 0.5rem;
+}
+
+.stRadio > div > label {
+    background: var(--bg-card);
+    padding: 0.875rem 1.25rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    cursor: pointer;
+    color: var(--text) !important;
+}
+
+.stRadio > div > label:hover {
+    border-color: var(--primary);
+    background: var(--bg-elevated);
+}
+
+.stRadio > div > label[data-checked="true"] {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white !important;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Checkbox */
+.stCheckbox {
+    color: var(--text) !important;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    color: var(--text) !important;
+}
+
+.streamlit-expanderHeader:hover {
+    border-color: var(--primary);
+    background: var(--bg-elevated);
+}
+
+.streamlit-expanderContent {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: none;
+}
+
+/* Chat messages */
+.stChatMessage {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+}
+
+/* Dataframe */
+.stDataFrame {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+/* Success/Error/Warning/Info messages */
+.stSuccess, .stError, .stWarning, .stInfo {
+    border-radius: 10px;
+    padding: 1rem;
+    border-left: 4px solid;
+    font-weight: 500;
+}
+
+.stSuccess {
+    background: rgba(16, 185, 129, 0.15);
+    border-left-color: var(--success);
+    color: #34D399 !important;
+}
+
+.stError {
+    background: rgba(239, 68, 68, 0.15);
+    border-left-color: var(--error);
+    color: #F87171 !important;
+}
+
+.stWarning {
+    background: rgba(245, 158, 11, 0.15);
+    border-left-color: var(--warning);
+    color: #FBBF24 !important;
+}
+
+.stInfo {
+    background: rgba(139, 92, 246, 0.15);
+    border-left-color: var(--accent);
+    color: #A78BFA !important;
+}
+
+/* Medical Card Component */
+.medical-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.medical-card-header {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}
+
+/* Compact spacing */
+h1 {
+    margin-bottom: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+}
+
+h3 {
+    margin-top: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    color: var(--text) !important;
+}
+
+/* Tab styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 6px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 6px;
+    border: 1px solid var(--border);
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    color: var(--text-secondary);
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Remove default streamlit padding */
+.element-container {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Spinner */
+.stSpinner > div {
+    border-color: var(--primary) transparent transparent transparent !important;
+}
+
+/* Slider */
+.stSlider [data-baseweb="slider"] {
+    background: var(--bg-card);
+}
+
+/* Form */
+.stForm {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* Time input */
+.stTimeInput > div > div > input {
+    background: var(--bg-card);
+    color: var(--text) !important;
+    border: 1px solid var(--border);
+}
+
+/* Date input */
+.stDateInput > div > div > input {
+    background: var(--bg-card);
+    color: var(--text) !important;
+    border: 1px solid var(--border);
+}

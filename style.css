@@ -1,0 +1,799 @@
+/* ==========================================================================
+   MediMate Premium Design System - Neural Warmth Aesthetic
+   ========================================================================== */
+
+/* === 0. CSS TOKENS === */
+:root {
+    /* Primary Brand Colors - Neural Network Purple */
+    --pulse-violet: #7C3AED;
+    --pulse-violet-dark: #5B21B6;
+    --pulse-violet-light: #A78BFA;
+    --pulse-violet-glow: rgba(124, 58, 237, 0.25);
+    
+    /* Secondary Accent - Medical Warmth */
+    --coral-pulse: #FF6B9D;
+    --coral-soft: #FFB3C6;
+    --coral-glow: rgba(255, 107, 157, 0.2);
+    
+    /* Tertiary Intelligence */
+    --mint-signal: #10B981;
+    --mint-soft: #D1FAE5;
+    --amber-caution: #F59E0B;
+    --amber-soft: #FEF3C7;
+    
+    /* Background System - Depth & Atmosphere */
+    --space-deep: #0A0A0F;
+    --space-mid: #141419;
+    --space-float: #1C1C24;
+    --space-hover: #252530;
+    --glass-white: rgba(255, 255, 255, 0.03);
+    --glass-white-strong: rgba(255, 255, 255, 0.07);
+    
+    /* Text Hierarchy */
+    --text-hero: #FFFFFF;
+    --text-primary: #F3F4F6;
+    --text-secondary: #D1D5DB;
+    --text-tertiary: #9CA3AF;
+    --text-ghost: #6B7280;
+    
+    /* Gradients - Signature Effects */
+    --gradient-neural: linear-gradient(135deg, #7C3AED 0%, #FF6B9D 100%);
+    --gradient-depth: linear-gradient(180deg, #0A0A0F 0%, #141419 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    --gradient-pulse: linear-gradient(90deg, #7C3AED 0%, #A78BFA 50%, #7C3AED 100%);
+    
+    /* Spacing Scale - 8px base */
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 96px;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-full: 9999px;
+    
+    /* Shadows - Depth System */
+    --shadow-sm: 0 2px 8px rgba(124, 58, 237, 0.04);
+    --shadow-md: 0 4px 16px rgba(124, 58, 237, 0.08);
+    --shadow-lg: 0 8px 32px rgba(124, 58, 237, 0.12);
+    --shadow-xl: 0 16px 48px rgba(124, 58, 237, 0.16);
+    --shadow-glow: 0 0 24px var(--pulse-violet-glow);
+    
+    /* Typography Scale */
+    --type-hero: 56px;
+    --type-display: 42px;
+    --type-h1: 32px;
+    --type-h2: 24px;
+    --type-h3: 18px;
+    --type-body-lg: 16px;
+    --type-body: 14px;
+    --type-label: 12px;
+    --type-micro: 11px;
+    
+    /* Animation Timing */
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --duration-fast: 0.2s;
+    --duration-normal: 0.3s;
+    --duration-slow: 0.4s;
+}
+
+/* === 1. RESET & BASE === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: var(--type-body);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--gradient-depth);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide Streamlit default elements */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Remove Streamlit padding */
+.block-container {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 1400px !important;
+}
+
+/* === 2. TYPOGRAPHY SYSTEM === */
+.hero-text {
+    font-size: var(--type-hero);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: var(--gradient-neural);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.display-text {
+    font-size: var(--type-display);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-hero);
+}
+
+.section-header {
+    font-size: var(--type-h1);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text-hero);
+    margin-bottom: var(--space-lg);
+}
+
+.card-header {
+    font-size: var(--type-h3);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-hero);
+    margin-bottom: var(--space-md);
+}
+
+.body-text {
+    font-size: var(--type-body);
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.label-text {
+    font-size: var(--type-label);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.micro-text {
+    font-size: var(--type-micro);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    color: var(--text-ghost);
+}
+
+/* === 3. ELEVATED CARD SYSTEM === */
+.glass-card {
+    background: var(--space-float);
+    background-image: var(--gradient-glass);
+    border: 1px solid var(--glass-white-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--duration-normal) var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-neural);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    border-color: var(--pulse-violet-light);
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+}
+
+/* Insight Panel - AI Result Card */
+.insight-panel {
+    background: var(--space-float);
+    border: 1px solid var(--glass-white-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    transition: all var(--duration-normal) var(--ease-smooth);
+    position: relative;
+}
+
+.insight-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-neural);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.insight-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--pulse-violet);
+}
+
+.insight-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-neural);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: var(--space-md);
+    box-shadow: var(--shadow-glow);
+}
+
+/* === 4. BUTTON SYSTEM - NEURAL ACTIONS === */
+
+/* Primary Action - Pulse Button */
+.btn-pulse {
+    background: var(--gradient-neural);
+    color: var(--text-hero);
+    font-size: var(--type-body);
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 24px var(--pulse-violet-glow);
+    transition: all var(--duration-normal) var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+    min-height: 48px;
+}
+
+.btn-pulse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-pulse:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px var(--pulse-violet-glow);
+}
+
+.btn-pulse:hover::before {
+    left: 100%;
+}
+
+.btn-pulse:active {
+    transform: scale(0.98);
+}
+
+.btn-pulse:disabled {
+    background: linear-gradient(135deg, #4B5563 0%, #6B7280 100%);
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Secondary Action - Ghost Button */
+.btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    font-size: var(--type-body);
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-white-strong);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-smooth);
+    min-height: 44px;
+}
+
+.btn-ghost:hover {
+    background: var(--glass-white);
+    border-color: var(--pulse-violet-light);
+    color: var(--pulse-violet-light);
+}
+
+/* Icon Action - Orb Button */
+.btn-orb {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--space-float);
+    background-image: var(--gradient-glass);
+    border: 1px solid var(--glass-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-smooth);
+    color: var(--text-secondary);
+}
+
+.btn-orb:hover {
+    background: var(--gradient-neural);
+    color: var(--text-hero);
+    transform: rotate(15deg);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Streamlit Button Override */
+.stButton > button {
+    background: var(--gradient-neural) !important;
+    color: var(--text-hero) !important;
+    font-size: var(--type-body) !important;
+    font-weight: 600 !important;
+    padding: 12px 32px !important;
+    border-radius: var(--radius-md) !important;
+    border: none !important;
+    box-shadow: 0 4px 24px var(--pulse-violet-glow) !important;
+    transition: all var(--duration-normal) var(--ease-smooth) !important;
+    min-height: 48px !important;
+    width: 100%;
+}
+
+.stButton > button:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 32px var(--pulse-violet-glow) !important;
+}
+
+.stButton > button:active {
+    transform: scale(0.98) !important;
+}
+
+/* === 5. FORM ELEMENTS === */
+
+/* Input Fields */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div > div,
+.stNumberInput > div > div > input {
+    background: var(--space-float) !important;
+    border: 1px solid var(--glass-white-strong) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--text-primary) !important;
+    padding: 12px 16px !important;
+    font-size: var(--type-body) !important;
+    transition: all var(--duration-fast) var(--ease-smooth) !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus,
+.stNumberInput > div > div > input:focus {
+    border: 2px solid var(--pulse-violet) !important;
+    box-shadow: 0 0 0 4px var(--pulse-violet-glow) !important;
+    background: var(--space-hover) !important;
+    outline: none !important;
+}
+
+/* Labels */
+.stTextInput > label,
+.stTextArea > label,
+.stSelectbox > label,
+.stNumberInput > label {
+    font-size: var(--type-label) !important;
+    font-weight: 500 !important;
+    color: var(--text-tertiary) !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    margin-bottom: var(--space-xs) !important;
+}
+
+/* File Uploader */
+.stFileUploader {
+    background: var(--space-float) !important;
+    border: 2px dashed var(--glass-white-strong) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-xl) !important;
+    transition: all var(--duration-normal) var(--ease-smooth) !important;
+}
+
+.stFileUploader:hover {
+    border-color: var(--pulse-violet) !important;
+    background: var(--space-hover) !important;
+}
+
+/* === 6. SIGNAL TAGS === */
+.signal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: var(--type-label);
+    font-weight: 500;
+    transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.signal-tag-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+    color: var(--mint-signal);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.signal-tag-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+    color: var(--amber-caution);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.signal-tag-error {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 107, 157, 0.1));
+    color: var(--coral-pulse);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+.signal-tag-info {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(124, 58, 237, 0.1));
+    color: var(--pulse-violet-light);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+.signal-tag:hover {
+    transform: scale(1.05);
+}
+
+/* === 7. CONFIDENCE METER === */
+.confidence-meter {
+    width: 100%;
+    height: 8px;
+    background: var(--glass-white);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+    margin: var(--space-md) 0;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: var(--gradient-neural);
+    border-radius: var(--radius-full);
+    transition: width 1s var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.confidence-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* === 8. ALERTS & BANNERS === */
+.signal-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+    border-left: 4px solid;
+    animation: slideDown 0.4s var(--ease-smooth);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.signal-banner-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--mint-signal);
+    color: var(--mint-signal);
+}
+
+.signal-banner-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--amber-caution);
+    color: var(--amber-caution);
+}
+
+.signal-banner-error {
+    background: rgba(255, 107, 157, 0.1);
+    border-color: var(--coral-pulse);
+    color: var(--coral-pulse);
+}
+
+.signal-banner-info {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: var(--pulse-violet);
+    color: var(--pulse-violet-light);
+}
+
+/* Streamlit Alert Override */
+.stAlert {
+    background: rgba(124, 58, 237, 0.1) !important;
+    border-left: 4px solid var(--pulse-violet) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--text-primary) !important;
+}
+
+/* === 9. SKELETON LOADERS === */
+.skeleton {
+    background: linear-gradient(90deg, var(--space-float) 0%, var(--space-hover) 50%, var(--space-float) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: var(--radius-md);
+    opacity: 0.6;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* === 10. ANIMATIONS === */
+
+/* Fade In */
+.fade-in {
+    animation: fadeIn 0.4s var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse Glow */
+.pulse-glow {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--pulse-violet-glow);
+    }
+    50% {
+        box-shadow: 0 0 40px var(--pulse-violet-glow);
+    }
+}
+
+/* Success Bounce */
+.success-bounce {
+    animation: successBounce 0.6s var(--ease-bounce);
+}
+
+@keyframes successBounce {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* === 11. UTILITY CLASSES === */
+.gradient-text {
+    background: var(--gradient-neural);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glow-text {
+    text-shadow: 0 0 20px var(--pulse-violet-glow);
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-gap-sm { gap: var(--space-sm); }
+.flex-gap-md { gap: var(--space-md); }
+.flex-gap-lg { gap: var(--space-lg); }
+
+/* === 12. SIDEBAR STYLING === */
+.css-1d391kg {
+    background: var(--space-mid) !important;
+    border-right: 1px solid var(--glass-white-strong) !important;
+}
+
+.sidebar .sidebar-content {
+    background: var(--space-mid) !important;
+}
+
+/* Sidebar Navigation */
+.css-17lntkn {
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    border-radius: var(--radius-md) !important;
+    transition: all var(--duration-fast) var(--ease-smooth) !important;
+}
+
+.css-17lntkn:hover {
+    background: var(--space-hover) !important;
+    color: var(--pulse-violet-light) !important;
+}
+
+/* === 13. RESPONSIVE === */
+@media (max-width: 768px) {
+    :root {
+        --type-hero: 36px;
+        --type-display: 32px;
+        --type-h1: 24px;
+    }
+    
+    .glass-card {
+        padding: var(--space-lg);
+    }
+    
+    .insight-panel {
+        padding: var(--space-md);
+    }
+}
+
+/* === 14. ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Indicators */
+*:focus-visible {
+    outline: 2px solid var(--pulse-violet) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px var(--pulse-violet-glow) !important;
+}
+
+/* === 15. STREAMLIT SPECIFIC OVERRIDES === */
+
+/* Remove default Streamlit styling */
+.stApp {
+    background: var(--gradient-depth) !important;
+}
+
+/* Tab styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: var(--space-md);
+    background: transparent !important;
+    border-bottom: 1px solid var(--glass-white-strong) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+    padding: var(--space-sm) var(--space-lg) !important;
+    font-weight: 500 !important;
+    border: none !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: var(--gradient-neural) !important;
+    color: var(--text-hero) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+/* Checkbox styling */
+.stCheckbox > label {
+    color: var(--text-primary) !important;
+}
+
+.stCheckbox > label > div[role="checkbox"] {
+    border-color: var(--pulse-violet) !important;
+    background-color: var(--space-float) !important;
+}
+
+.stCheckbox > label > div[role="checkbox"][aria-checked="true"] {
+    background-color: var(--pulse-violet) !important;
+}
+
+/* Metric styling */
+.stMetric {
+    background: var(--space-float) !important;
+    padding: var(--space-md) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--glass-white-strong) !important;
+}
+
+.stMetric > label {
+    color: var(--text-tertiary) !important;
+    font-size: var(--type-label) !important;
+}
+
+.stMetric > div {
+    color: var(--text-hero) !important;
+    font-weight: 600 !important;
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background: var(--space-float) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--glass-white-strong) !important;
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background: var(--space-hover) !important;
+    border-color: var(--pulse-violet) !important;
+}
+
+/* Success/Error/Warning/Info boxes */
+.stSuccess {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border-left: 4px solid var(--mint-signal) !important;
+    color: var(--mint-signal) !important;
+}
+
+.stError {
+    background: rgba(255, 107, 157, 0.1) !important;
+    border-left: 4px solid var(--coral-pulse) !important;
+    color: var(--coral-pulse) !important;
+}
+
+.stWarning {
+    background: rgba(245, 158, 11, 0.1) !important;
+    border-left: 4px solid var(--amber-caution) !important;
+    color: var(--amber-caution) !important;
+}
+
+.stInfo {
+    background: rgba(124, 58, 237, 0.1) !important;
+    border-left: 4px solid var(--pulse-violet) !important;
+    color: var(--pulse-violet-light) !important;
+}
