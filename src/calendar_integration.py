@@ -28,22 +28,26 @@ class CalendarIntegration:
         if not self.available:
             return False
         try:
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            creds_path = os.path.join(BASE_DIR, 'credentials.json')
+            token_path = os.path.join(BASE_DIR, 'token.pickle')
+            
             creds = None
-            if os.path.exists('token.pickle'):
-                with open('token.pickle', 'rb') as token:
+            if os.path.exists(token_path):
+                with open(token_path, 'rb') as token:
                     creds = pickle.load(token)
             
             if not creds or not creds.valid:
                 if creds and creds.expired and creds.refresh_token:
                     creds.refresh(Request())
                 else:
-                    if not os.path.exists('credentials.json'):
-                        logger.error("credentials.json not found. Download from Google Cloud Console")
+                    if not os.path.exists(creds_path):
+                        logger.error(f"credentials.json not found at {creds_path}. Download from Google Cloud Console")
                         return False
-                    flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+                    flow = InstalledAppFlow.from_client_secrets_file(creds_path, SCOPES)
                     creds = flow.run_local_server(port=0)
                 
-                with open('token.pickle', 'wb') as token:
+                with open(token_path, 'wb') as token:
                     pickle.dump(creds, token)
             
             self.service = build('calendar', 'v3', credentials=creds)

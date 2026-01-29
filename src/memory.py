@@ -8,7 +8,7 @@ logger = setup_logger(__name__)
 
 class MemoryManager:
     def __init__(self):
-        self.client = MongoClient(Config.MONGO_URI)
+        self.client = MongoClient(Config.MONGO_URI, **Config.get_tls_kwargs())
         self.db = self.client.get_database("prescription_db")
         self.sessions = self.db.sessions
         self.messages = self.db.messages

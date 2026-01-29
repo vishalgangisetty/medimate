@@ -17,5 +17,4 @@ googletrans==4.0.0rc1
 requests
 gTTS
 SpeechRecognition
-pyaudio
 certifi

@@ -78,6 +78,14 @@ class VoiceAssistant:
         Listen to microphone and convert to text
         """
         try:
+            # Check if PyAudio is available (required for Microphone)
+            try:
+                import pyaudio
+            except ImportError:
+                logger.warning("PyAudio not installed - Microphone input disabled")
+                st.error("🎤 Microphone input is not available in this environment (Server-side audio not supported)")
+                return None
+
             with sr.Microphone() as source:
                 logger.info("Listening...")
                 # Adjust for ambient noise
@@ -100,12 +108,12 @@ def render_voice_input_button(key: str = "voice_input") -> str:
     col1, col2 = st.columns([5, 1])
     
     with col2:
-        if st.button("🎤", key=key, help="Click to speak", use_container_width=True):
+        if st.button("🎤", key=key, help="Click to speak (Local only)", use_container_width=True):
             st.session_state[f"{key}_listening"] = True
     
     # If listening state is active
     if st.session_state.get(f"{key}_listening", False):
-        with st.spinner("🎤 Listening... Speak now"):
+        with st.spinner("🎤 Listening..."):
             voice_assistant = st.session_state.get('voice_assistant')
             if not voice_assistant:
                 voice_assistant = VoiceAssistant()
@@ -124,6 +132,9 @@ def render_voice_input_button(key: str = "voice_input") -> str:
             if text:
                 st.success(f"✓ Heard: {text}")
                 return text
+            elif text is None:
+                # If None was returned, error was likely already shown (e.g. missing PyAudio)
+                pass
             else:
                 st.error("❌ Could not understand. Please try again.")
                 return None
